@@ -1,0 +1,52 @@
+<h1>SFTP Admins</h1>
+
+<a href="/">Create A Regular User Account</a>
+
+<% if flash[:success] %>
+  <h4 style="color:green"><%= flash[:success] %></h4>
+<% end %>
+
+<% if flash[:failure] %>
+  <h4 style="color:red"><%= flash[:failure] %></h4>
+<% end %>
+
+<h2>New SFTP Administrator</h1>
+<form action="/admins" method="post">
+  <label for="admin_username">Username:</label><br />
+  <input id="admin_username" class="text_field" name="admin[username]" type="text" />
+  <br />
+ 
+  <label for="admin_password">Password:</label><br />
+  <input id="admin_password" class="text_field" name="admin[password]" type="password" />
+  <br />
+ 
+  <input class="submit" type="submit" value="Create User" />
+</form>
+
+<table id="admins" border="1">
+  <tr>
+    <th>Username</th>
+    <th>Password</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @admins.each do |admin| %>
+    <tr>
+      <td><%= admin.username %></td>
+      <td>
+        <% admin.password.length.times do %>
+          <b>?</b>
+        <% end %>
+      </td>
+      <td><a href="/admins/<%= admin.id %>/edit">Edit</a></td>
+      <td>
+        <form action="/admins/<%= admin.id %>" method="post" style="padding:0px; margin:0px;">
+          <input type="hidden" name="_method" value="delete" /> 
+          <input type="submit" value="Delete" />
+        </form>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @admins %>

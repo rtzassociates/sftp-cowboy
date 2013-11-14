@@ -1,0 +1,18 @@
+<h1>SFTP Users</h1>
+<h2>Edit User</h2>
+
+<% if flash[:failure] %>
+  <h4 style="color:red"><%= flash[:failure] %></h4>
+<% end %>
+
+<form action="/users/<%= @user.id %>" method="post">
+  <input type="hidden" name="_method" value="put" />
+
+  <label for="user_password">Password:</label><br />
+  <input id="user_password" class="text_field" name="user[password]" type="text" />
+  <br />
+ 
+  <input class="submit" type="submit" value="Update Password" />
+</form>
+
+<a href="/">← Back</a>

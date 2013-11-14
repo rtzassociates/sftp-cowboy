@@ -1,0 +1,19 @@
+<h1>SFTP Admins</h1>
+
+<h2>Edit Admin</h2>
+
+<% if flash[:failure] %>
+  <h4 style="color:red"><%= flash[:failure] %></h4>
+<% end %>
+
+<form action="/admins/<%= @admin.id %>" method="post">
+  <input type="hidden" name="_method" value="put" />
+
+  <label for="admin_password">Password:</label><br />
+  <input id="admin_password" class="text_field" name="admin[password]" type="text" />
+  <br />
+ 
+  <input class="submit" type="submit" value="Update Password" />
+</form>
+
+<a href="/admins">← Back</a>
